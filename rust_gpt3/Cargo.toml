@@ -1,9 +1,15 @@
 [package]
-name = "rust_gpt"
+name = "rust_gpt3"
 version = "0.1.0"
 authors = ["Cooper <kcoopermiller9@gmail.com>"]
-edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/kcoopermiller/rust-openai"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+reqwest = { version = "0.11.6", features = ["blocking", "json"] }
+dotenv = "0.15.0"
+tokio = { version = "1.14.0", features = ["full"] }
+serde = { version = "1.0.130", features = ["derive"] }
