@@ -1,5 +1,5 @@
 [package]
-name = "rust_gpt3"
+name = "rust_openai"
 version = "0.1.0"
 authors = ["Cooper <kcoopermiller9@gmail.com>"]
 license-file = "LICENSE"
