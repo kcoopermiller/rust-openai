@@ -3,6 +3,7 @@ use rust_openai::openai;
 use std::env;
 
 // TODO: create lib.rs, create client struct, study unfamiliar terminology
+// TODO: one big get method
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -13,8 +14,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = openai::Client::new(api_key);
 
     client.get_engines().await?;
+    client.engine("davinci").await?;
 
-    client.completion("i'm in your", 5, "davinci").await?;
+    // client.completion("i'm in your", 5, "davinci").await?;
 
     Ok(())
 }
