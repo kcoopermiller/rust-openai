@@ -2,9 +2,6 @@ use dotenv::dotenv;
 use rust_openai::openai;
 use std::env;
 
-// TODO: create lib.rs, create client struct, study unfamiliar terminology
-// TODO: one big get method
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // load api key from .env into std::env
