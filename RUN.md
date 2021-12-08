@@ -10,4 +10,4 @@ To use this library, you'll need a GPT-3 API Key. Once obtained, add it to a `.e
 2. In `.env`, add your api key:
    `API_KEY=[your api key]`
 
-Now use the command `cargo run --example examples` to generate a completions endpoint
+Now use the command `cargo run --example example` to generate a completions endpoint
