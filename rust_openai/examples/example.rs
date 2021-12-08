@@ -16,11 +16,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // shows details for a single model
     client.engine("davinci").await?;
 
-    client.finetune("[training file]", "curie").await?;
+    // client.finetune("[training file]", "curie").await?;
 
     client.completion(
         "hello, ", 
-        64, 
+        4, 
         "davinci"
     ).await?;
 
