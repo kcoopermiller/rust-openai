@@ -10,16 +10,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let client = openai::Client::new(api_key);
 
-    // client.get_engines().await?;
-    // client.engine("davinci").await?;
+    // lists all of the available models
+    client.get_engines().await?;
 
-    // client.finetune("light_novels.jsonl", "curie").await?;
+    // shows details for a single model
+    client.engine("davinci").await?;
 
-    // client.completion(
-    //     "", 
-    //     42, 
-    //     "curie:ft-user-wlep6pfel6wm7prcxzlzijao-2021-11-26-03-20-31"
-    // ).await?;
+    client.finetune("[training file]", "curie").await?;
 
     client.completion(
         "hello, ", 

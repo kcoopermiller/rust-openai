@@ -4,6 +4,7 @@ pub mod openai {
     use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION, CONTENT_TYPE};
     use serde::{Deserialize, Serialize};
 
+    // all structs were created to store deserialized json data from the api
     #[derive(Debug, Deserialize)]
     struct Engines {
         data: Vec<Engine>,
@@ -53,6 +54,7 @@ pub mod openai {
     }
 
     impl Client {
+        // constructor that takes the user's openai api key
         pub fn new(api_key: String) -> Client {
             Client {
                 _api_key: api_key,
@@ -60,15 +62,20 @@ pub mod openai {
             }
         }
 
+        // get request that requests a list of all of the avaiable models
         pub async fn get_engines(&self) -> Result<(), Box<dyn std::error::Error>> {
             let client = reqwest::Client::new();
             let mut headers = HeaderMap::new();
+            
+            // creates REST api header using the user's api key
             headers.insert(
                 AUTHORIZATION,
                 format!("Bearer {}", &self._api_key)
                     .parse::<HeaderValue>()
                     .unwrap(),
             );
+            
+            // get request
             let resp = client
                 .get(format!("{}/engines", &self._base_url))
                 .headers(headers)
@@ -81,15 +88,20 @@ pub mod openai {
             Ok(())
         }
 
+        // get request that requests the details of a specific model
         pub async fn engine(&self, engine_id: &str) -> Result<(), Box<dyn std::error::Error>> {
             let client = reqwest::Client::new();
             let mut headers = HeaderMap::new();
+            
+            // creates REST api header using the user's api key
             headers.insert(
                 AUTHORIZATION,
                 format!("Bearer {}", &self._api_key)
                     .parse::<HeaderValue>()
                     .unwrap(),
             );
+            
+            // get request
             let resp = client
                 .get(format!("{}/engines/{}", &self._base_url, &engine_id))
                 .headers(headers)
@@ -113,6 +125,8 @@ pub mod openai {
                 CONTENT_TYPE,
                 "application/json".parse::<HeaderValue>().unwrap(),
             );
+           
+            // creates REST api header using the user's api key
             headers.insert(
                 AUTHORIZATION,
                 format!("Bearer {}", &self._api_key)
@@ -120,11 +134,14 @@ pub mod openai {
                     .unwrap(),
             );
 
+            // creates REST api body
             let params = Body {
                 prompt: prompt_.to_string(),
                 max_tokens: max_tokens_,
             };
 
+            
+            // post request
             let client = reqwest::Client::new();
             let resp = client
                 .post(format!(
@@ -148,6 +165,8 @@ pub mod openai {
                 CONTENT_TYPE,
                 "application/json".parse::<HeaderValue>().unwrap(),
             );
+            
+            // rest api header
             headers.insert(
                 AUTHORIZATION,
                 format!("Bearer {}", &self._api_key)
@@ -155,11 +174,13 @@ pub mod openai {
                     .unwrap(),
             );
             
+            // rest api body designed for finetuning
             let params = FinetuneBody {
                 _training_file: training_file.to_string(),
                 _base_model: base_model.to_string()
             };
 
+            // post request
             let client = reqwest::Client::new();
             let resp = client
                 .post(" 
